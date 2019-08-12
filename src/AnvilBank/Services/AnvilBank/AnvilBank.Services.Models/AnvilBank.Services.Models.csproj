@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\AnvilBank.Common\AnvilBank.Common.csproj" />
+    <ProjectReference Include="..\..\..\Data\AnvilBank\AnvilBank.Models\AnvilBank.Models.csproj" />
+  </ItemGroup>
+
+</Project>
