@@ -1,5 +1,7 @@
 ﻿using System;
 using AnvilBank.Common.AutoMapping.Profiles;
+using AnvilBank.Common.EmailSender;
+using AnvilBank.Common.Utils;
 using AnvilBank.Data;
 using AnvilBank.Models;
 using AnvilBank.Web.Infrastructure.Extensions;
@@ -85,13 +87,16 @@ namespace AnvilBank.Web
             //            throw new ApplicationException("BankConfiguration is invalid");
             //        }
             //    })
-            //    .PostConfigure<SendGridConfiguration>(settings =>
-            //    {
-            //        if (!ValidationUtil.IsObjectValid(settings))
-            //        {
-            //            throw new ApplicationException("SendGridConfiguration is invalid");
-            //        }
-            //    });
+
+            services.Configure<SendGridConfiguration>(
+                this.Configuration.GetSection(nameof(SendGridConfiguration)));
+            services.PostConfigure<SendGridConfiguration>(settings =>
+            {
+                if (!ValidationUtil.IsObjectValid(settings))
+                {
+                    throw new ApplicationException("SendGridConfiguration is invalid.");
+                }
+            });
 
             services
                 .AddResponseCompression(options => options.EnableForHttps = true);
@@ -146,7 +151,7 @@ namespace AnvilBank.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
+            
             app.InitializeDatabase();
         }
     }
