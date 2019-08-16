@@ -21,4 +21,8 @@
     <ProjectReference Include="..\..\Services\AnvilBank\AnvilBank.Services\AnvilBank.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\particles\" />
+  </ItemGroup>
+
 </Project>

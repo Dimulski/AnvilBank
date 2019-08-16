@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;
 
 namespace AnvilBank.Web
 {
@@ -34,7 +35,7 @@ namespace AnvilBank.Web
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
             });
 
             services.AddDbContextPool<AnvilBankDbContext>(options =>
@@ -128,17 +129,17 @@ namespace AnvilBank.Web
 
             app.UseHttpsRedirection();
 
-            //app.UseStaticFiles(
-            //    new StaticFileOptions
-            //    {
-            //        OnPrepareResponse = ctx =>
-            //        {
-            //            const int cacheDurationInSeconds = 60 * 60 * 24 * 365; // 1 year
-            //            ctx.Context.Response.Headers[HeaderNames.CacheControl] =
-            //                $"public,max-age={cacheDurationInSeconds}";
-            //        }
-            //    });
-            app.UseStaticFiles();
+            app.UseStaticFiles(
+                new StaticFileOptions
+                {
+                    OnPrepareResponse = ctx =>
+                    {
+                        const int cacheDurationInSeconds = 60 * 60 * 24 * 365; // 1 year
+                        ctx.Context.Response.Headers[HeaderNames.CacheControl] =
+                            $"public,max-age={cacheDurationInSeconds}";
+                    }
+                });
+            //app.UseStaticFiles();
 
             app.UseCookiePolicy();
 
