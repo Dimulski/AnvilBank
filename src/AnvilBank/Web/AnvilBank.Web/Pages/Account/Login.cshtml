@@ -1,9 +1,28 @@
 ﻿@page
-@model AnvilBank.Web.Pages.Account.LoginModel
+@model LoginModel
 @{
-    ViewData["Title"] = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Log in";
 }
 
-<h1>Login</h1>
-
+<div class="text-center col-md-5" style="margin: auto">
+    <h2>@ViewData["Title"]</h2>
+    <form method="post">
+        <hr />
+        <div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" class="form-control" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Log in</button>
+        </div>
+        <div class="form-group">
+            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+        </div>
+    </form>
+</div>

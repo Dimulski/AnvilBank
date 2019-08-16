@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
 using AnvilBank.Common;
 using AnvilBank.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AnvilBank.Web.Pages.Account
 {
-    //[AllowAnonymous]
+    [AllowAnonymous]
     public class ConfirmEmail : BasePageModel
     {
         private readonly UserManager<BankUser> userManager;

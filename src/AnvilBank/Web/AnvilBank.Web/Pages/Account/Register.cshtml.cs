@@ -5,13 +5,14 @@ using AnvilBank.Common;
 using AnvilBank.Common.EmailSender;
 using AnvilBank.Models;
 using AnvilBank.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace AnvilBank.Web.Pages.Account
 {
-    //[AllowAnonymous]
+    [AllowAnonymous]
     public class RegisterModel : BasePageModel
     {
         private readonly IEmailSender emailSender;

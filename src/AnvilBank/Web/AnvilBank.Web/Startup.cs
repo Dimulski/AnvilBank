@@ -53,14 +53,14 @@ namespace AnvilBank.Web
                 .AddEntityFrameworkStores<AnvilBankDbContext>()
                 .AddDefaultTokenProviders();
 
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //    options.Cookie.HttpOnly = true;
-            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-            //    options.SlidingExpiration = true;
-            //    options.LoginPath = "/account/login";
-            //    options.LogoutPath = "/account/logout";
-            //});
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.SlidingExpiration = true;
+                options.LoginPath = "/account/login";
+                options.LogoutPath = "/account/logout";
+            });
 
             services
                 .AddDomainServices()
@@ -142,7 +142,7 @@ namespace AnvilBank.Web
 
             app.UseCookiePolicy();
 
-            //app.UseAuthentication();
+            app.UseAuthentication();
             //app.UseStatusCodePagesWithReExecute("/error/{0}");
 
             app.UseMvc(routes =>
