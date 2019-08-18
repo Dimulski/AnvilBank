@@ -9,4 +9,8 @@
     <ProjectReference Include="..\..\..\Data\AnvilBank\AnvilBank.Models\AnvilBank.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BankAccount\" />
+  </ItemGroup>
+
 </Project>

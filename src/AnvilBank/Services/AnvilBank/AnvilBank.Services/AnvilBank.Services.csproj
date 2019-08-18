@@ -9,7 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Implementations\" />
+    <ProjectReference Include="..\..\..\Data\AnvilBank\AnvilBank.Data\AnvilBank.Data.csproj" />
+    <ProjectReference Include="..\AnvilBank.Services.Models\AnvilBank.Services.Models.csproj" />
   </ItemGroup>
 
 </Project>

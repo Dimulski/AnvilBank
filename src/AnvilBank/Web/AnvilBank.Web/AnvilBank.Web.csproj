@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\Common\AnvilBank.Common\AnvilBank.Common.csproj" />
     <ProjectReference Include="..\..\Data\AnvilBank\AnvilBank.Data\AnvilBank.Data.csproj" />
     <ProjectReference Include="..\..\Data\AnvilBank\AnvilBank.Models\AnvilBank.Models.csproj" />
+    <ProjectReference Include="..\..\Services\AnvilBank\AnvilBank.Services.Models\AnvilBank.Services.Models.csproj" />
     <ProjectReference Include="..\..\Services\AnvilBank\AnvilBank.Services\AnvilBank.Services.csproj" />
   </ItemGroup>
 

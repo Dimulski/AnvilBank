@@ -1,5 +1,6 @@
 ﻿using System;
 using AnvilBank.Common.AutoMapping.Profiles;
+using AnvilBank.Common.Configuration;
 using AnvilBank.Common.EmailSender;
 using AnvilBank.Common.Utils;
 using AnvilBank.Data;
@@ -74,20 +75,27 @@ namespace AnvilBank.Web
             services
                 .Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
-            //services
-            //    .Configure<BankConfiguration>(
-            //        this.Configuration.GetSection(nameof(BankConfiguration)))
-            //    .Configure<SendGridConfiguration>(
-            //        this.Configuration.GetSection(nameof(SendGridConfiguration)));
+            services
+                .Configure<BankConfiguration>(
+                    this.Configuration.GetSection(nameof(BankConfiguration)))
+                .Configure<SendGridConfiguration>(
+                    this.Configuration.GetSection(nameof(SendGridConfiguration)));
 
-            //services
-            //    .PostConfigure<BankConfiguration>(settings =>
-            //    {
-            //        if (!ValidationUtil.IsObjectValid(settings))
-            //        {
-            //            throw new ApplicationException("BankConfiguration is invalid");
-            //        }
-            //    })
+            services
+                .PostConfigure<BankConfiguration>(settings =>
+                {
+                    if (!ValidationUtil.IsObjectValid(settings))
+                    {
+                        throw new ApplicationException("BankConfiguration is invalid");
+                    }
+                })
+                .PostConfigure<SendGridConfiguration>(settings =>
+                {
+                    if (!ValidationUtil.IsObjectValid(settings))
+                    {
+                        throw new ApplicationException("SendGridConfiguration is invalid");
+                    }
+                });
 
             services.Configure<SendGridConfiguration>(
                 this.Configuration.GetSection(nameof(SendGridConfiguration)));
