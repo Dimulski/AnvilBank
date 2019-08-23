@@ -20,6 +20,7 @@
             "Looks like you don't have any accounts. Please feel free to create one and then come back again to process your payment.";
 
         public const string SuccessfulTransaction = "Transaction successful.";
+        public const string InvalidTransactionAmount = "The amount field cannot be lower than 0.01.";
 
         public const string SameAccountsError =
             "The account which you are sending money from and the destination account must be different.";

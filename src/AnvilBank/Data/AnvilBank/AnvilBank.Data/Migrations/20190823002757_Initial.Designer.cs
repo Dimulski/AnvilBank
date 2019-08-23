@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnvilBank.Data.Migrations
 {
     [DbContext(typeof(AnvilBankDbContext))]
-    [Migration("20190812185213_Initial")]
+    [Migration("20190823002757_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,6 +101,47 @@ namespace AnvilBank.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("AnvilBank.Models.Transaction", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AccountId")
+                        .IsRequired();
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("Destination")
+                        .IsRequired()
+                        .HasMaxLength(34);
+
+                    b.Property<DateTime>("MadeOn");
+
+                    b.Property<string>("RecipientName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("ReferenceNumber")
+                        .IsRequired();
+
+                    b.Property<string>("SenderName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Source")
+                        .IsRequired()
+                        .HasMaxLength(34);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -218,6 +259,14 @@ namespace AnvilBank.Data.Migrations
                     b.HasOne("AnvilBank.Models.BankUser", "User")
                         .WithMany("BankAccounts")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AnvilBank.Models.Transaction", b =>
+                {
+                    b.HasOne("AnvilBank.Models.BankAccount", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

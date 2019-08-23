@@ -3,6 +3,7 @@ using AnvilBank.Services.Contracts;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace AnvilBank.Services.Implementations
 {
@@ -42,7 +43,17 @@ namespace AnvilBank.Services.Implementations
 
         public bool IsUniqueIdValid(string id)
         {
-            throw new NotImplementedException();
+            var rgx = new Regex($@"^{this.bankConfiguration.UniqueIdentifier}[A-Z]\d{{8}}$");
+
+            if (!rgx.IsMatch(id))
+            {
+                return false;
+            }
+
+            char expectedCheckChar = GenerateCheckCharacter(id.ToCharArray());
+            char actualCheckChar = id[3];
+
+            return actualCheckChar == expectedCheckChar;
         }
 
         private static char GenerateCheckCharacter(IReadOnlyList<char> uniqueId)

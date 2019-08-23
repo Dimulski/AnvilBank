@@ -1,0 +1,60 @@
+﻿@model TransactionListingViewModel
+@{
+    ViewData["Title"] = "All payments";
+}
+
+<div class="container">
+    @if (!Model.Transactions.Any())
+    {
+        <h3>No transactions have been made from this account</h3>
+    }
+    else
+    {
+        <h3>All payments from all accounts</h3>
+        <table class="table table-hover table-bordered auto-datatable">
+            <thead>
+                <tr>
+                    <th data-priority="2">Date</th>
+                    <th data-priority="4">Details</th>
+                    <th data-priority="3">From</th>
+                    <th data-priority="5">To</th>
+                    <th data-priority="1">Amount</th>
+                    <th class="none">Reference number</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var transaction in Model.Transactions)
+                {
+                    <tr>
+                        <td class="auto-format-date">@transaction.MadeOn.ToString("O")</td>
+                        <td class="word-break-all">@transaction.Description</td>
+                        <td>
+                            <p>@transaction.SenderName</p>
+                            <p>@transaction.Source</p>
+                        </td>
+                        <td>
+                            <p>@transaction.RecipientName</p>
+                            <p>@transaction.Destination</p>
+                        </td>
+                        <td>
+                            @if (transaction.Amount < 0)
+                            {
+                                <span class="text-red">@transaction.Amount EUR</span>
+                            }
+                            else
+                            {
+                                <span class="text-green">+@transaction.Amount EUR</span>
+                            }
+                        </td>
+                        <td>@transaction.ReferenceNumber</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@if (Model.Transactions.Any())
+{
+    <partial name="_PaginationPartial" model="@Model.Transactions" />
+}

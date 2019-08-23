@@ -56,7 +56,7 @@ namespace AnvilBank.Web.Infrastructure.Extensions
                             Balance = 10000,
                             CreatedOn = DateTime.UtcNow,
                             Name = "Main account",
-                            UniqueId = "ABCJ98131785"
+                            UniqueId = "AVLJ98131785"
                         }
                     }
                 };

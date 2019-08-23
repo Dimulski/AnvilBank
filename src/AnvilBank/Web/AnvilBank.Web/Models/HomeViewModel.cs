@@ -1,4 +1,5 @@
-﻿using AnvilBank.Web.Models.BankAccount;
+﻿using AnvilBank.Web.Areas.Transactions.Models;
+using AnvilBank.Web.Models.BankAccount;
 using System.Collections.Generic;
 
 namespace AnvilBank.Web.Models
@@ -7,6 +8,6 @@ namespace AnvilBank.Web.Models
     {
         public IEnumerable<BankAccountIndexViewModel> UserBankAccounts { get; set; }
 
-        ///public IEnumerable<TransactionListingDto> Transactions { get; set; }
+        public IEnumerable<TransactionListingDto> Transactions { get; set; }
     }
 }

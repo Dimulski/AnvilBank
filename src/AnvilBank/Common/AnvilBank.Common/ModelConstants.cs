@@ -31,7 +31,7 @@
             public const int SecurityCodeMaxLength = 3;
         }
 
-        public static class Transactions
+        public static class Transaction
         {
             public const int DescriptionMaxLength = 150;
             public const string MinStartingPrice = "0.01";

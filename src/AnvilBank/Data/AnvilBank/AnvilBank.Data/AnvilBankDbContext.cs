@@ -14,6 +14,8 @@ namespace AnvilBank.Data
 
         public DbSet<BankAccount> Accounts { get; set; }
 
+        public DbSet<Transaction> Transactions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new UserConfiguration());
