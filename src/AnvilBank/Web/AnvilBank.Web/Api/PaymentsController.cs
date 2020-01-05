@@ -4,15 +4,13 @@ using AnvilBank.Web.Api.Models;
 using AnvilBank.Web.Infrastructure.Helpers.GlobalTransactionHelper;
 using AnvilBank.Web.Infrastructure.Helpers.GlobalTransactionHelper.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AnvilBank.Web.Api
 {
+    [EnableCors("AllowOrigin")]
     [Route("api/[controller]")]
     [ApiController]
     public class PaymentsController : ControllerBase
@@ -27,6 +25,7 @@ namespace AnvilBank.Web.Api
         }
 
         // POST: api/Payments
+        [EnableCors("AllowOrigin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PaymentDto data)
         {

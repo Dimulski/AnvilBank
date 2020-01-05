@@ -110,6 +110,12 @@ namespace AnvilBank.Web
             services
                 .AddResponseCompression(options => options.EnableForHttps = true);
 
+            //
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -127,6 +133,9 @@ namespace AnvilBank.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            // TODO: Remove after finishing sendPaymentInfo in Angular-Store
+            app.UseCors(options => options.AllowAnyOrigin());
 
             //app.AddDefaultSecurityHeaders(
             //    new SecurityHeadersBuilder()

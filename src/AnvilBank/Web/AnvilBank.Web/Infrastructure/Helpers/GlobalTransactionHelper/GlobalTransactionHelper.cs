@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AnvilBank.Common.Configuration;
 using AnvilBank.Common.Utils;
@@ -20,10 +18,12 @@ namespace AnvilBank.Web.Infrastructure.Helpers.GlobalTransactionHelper
 
         public GlobalTransactionHelper(
             IBankAccountService bankAccountService,
-            IOptions<BankConfiguration> bankConfigurationOptions)
+            IOptions<BankConfiguration> bankConfigurationOptions,
+            ITransactionService transactionService)
         {
             this.bankAccountService = bankAccountService;
             this.bankConfiguration = bankConfigurationOptions.Value;
+            this.transactionService = transactionService;
         }
 
         public async Task<GlobalTransactionResult> TransactAsync(GlobalTransactionDto model)
@@ -35,7 +35,7 @@ namespace AnvilBank.Web.Infrastructure.Helpers.GlobalTransactionHelper
 
             // TODO: Remove this check or the one in PaymentsController
             var account = await this.bankAccountService
-                .GetByIdAsync<BankAccountConciseServiceModel>(model.DestinationBankAccountUniqueId);
+                .GetByUniqueIdAsync<BankAccountConciseServiceModel>(model.DestinationBankAccountUniqueId);
 
             if (account == null)
             {
@@ -51,7 +51,7 @@ namespace AnvilBank.Web.Infrastructure.Helpers.GlobalTransactionHelper
             {
                 Amount = -model.Amount,
                 Source = account.UniqueId,
-                Description = model.Description,
+                Description = model.Description ?? String.Empty,
                 AccountId = account.Id,
                 DestinationBankAccountUniqueId = model.DestinationBankAccountUniqueId,
                 SenderName = account.UserFullName,
